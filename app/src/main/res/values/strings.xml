@@ -1,7 +1,14 @@
 <resources>
     <string name="app_name">Empower Challenge</string>
+    <string name="intro_text">Enter coordinates and miles below</string>
     <string name="latitude">Latitude:</string>
     <string name="longitude">Longitude:</string>
+    <string name="hint_lat">Enter latitude</string>
+    <string name="hint_lon">Enter Longitude</string>
+    <string name="hint_miles">Distance in Miles</string>
+    <string name="search_empty_error">Search input is empty, please populate the fields</string>
     <string name="search">Search</string>
-    <string name="search_error_message">Unable to display results, try again</string>
+    <string name="search_error">Unable to display results, try again</string>
+    <string name="search_success">Coordinates within %s miles are:</string>
+    <string name="search_empty">No coordinates within %s miles</string>
 </resources>

@@ -16,49 +16,77 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:textColor="@color/colorPrimaryDark"
-        android:text="Enter coordinates and miles below"
+        android:text="@string/intro_text"
         android:textSize="18sp" />
 
-    <EditText
-        android:id="@+id/lat"
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/lat_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="enter latitude"
-        android:inputType="numberDecimal|numberSigned"
-        android:maxLines="1"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:singleLine="true"/>
+        android:layout_height="wrap_content">
 
-    <EditText
-        android:id="@+id/lon"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="enter longitude"
-        android:imeOptions="actionSearch"
-        android:inputType="numberDecimal|numberSigned"
-        android:maxLines="1"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:singleLine="true"/>
+        <EditText
+            android:id="@+id/lat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:maxLines="1"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:inputType="numberDecimal|numberSigned"
+            android:hint="@string/hint_lat" />
+    </android.support.design.widget.TextInputLayout>
 
-    <EditText
-        android:id="@+id/miles"
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/lon_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="distance in miles"
-        android:inputType="numberDecimal"
-        android:maxLines="1"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:singleLine="true"/>
-    
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/lon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:maxLines="1"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:inputType="numberDecimal|numberSigned"
+            android:hint="@string/hint_lon"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/miles_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/miles"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_miles"
+            android:inputType="numberDecimal"
+            android:maxLines="1"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:singleLine="true"/>
+    </android.support.design.widget.TextInputLayout>
+
     <Button
         android:id="@+id/search"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:text="@string/search"
         android:layout_gravity="center_vertical|center_horizontal"/>
+
+    <TextView
+        android:id="@+id/searchSuccessTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:textColor="@color/colorPrimaryDark"
+        tools:text="@string/search_success"
+        android:textSize="18sp" />
 
     <ProgressBar
         android:id="@+id/progressBar"

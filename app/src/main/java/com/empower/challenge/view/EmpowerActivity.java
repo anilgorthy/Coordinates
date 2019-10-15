@@ -1,17 +1,23 @@
 package com.empower.challenge.view;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.TextUtils;
+import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.empower.challenge.R;
@@ -30,7 +36,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class EmpowerActivity extends AppCompatActivity
-            implements EmpowerViewContract, View.OnClickListener {
+        implements EmpowerViewContract, View.OnClickListener {
 
     private static final String TAG = EmpowerActivity.class.getSimpleName();
     private EmpowerAdapter empowerAdapter;
@@ -48,6 +54,9 @@ public class EmpowerActivity extends AppCompatActivity
 
     @BindView(R.id.search)
     Button search;
+
+    @BindView(R.id.searchSuccessTV)
+    TextView searchSuccessTV;
 
     @BindView(R.id.coordinateRV)
     RecyclerView coordinateRV;
@@ -88,7 +97,7 @@ public class EmpowerActivity extends AppCompatActivity
 
     @Override
     public void displayError() {
-        Toast.makeText(this, this.getResources().getString(R.string.search_error_message), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, this.getResources().getString(R.string.search_error), Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -96,16 +105,30 @@ public class EmpowerActivity extends AppCompatActivity
         latStr = latitude.getText().toString();
         lonStr = longitude.getText().toString();
         miles = distanceInMiles.getText().toString();
-        Log.i(TAG, "Lat is: " + latStr + " , lon is: " + lonStr + " and miles is: " + miles);
-        hideKeyboard(this);
 
-        filteredCoordinateList = DistanceCalculation.fetchCoordinatesByDistance(this, latStr, lonStr, miles);
-        if (filteredCoordinateList.size() < 1) {
-            Toast.makeText(this, this.getResources().getString(R.string.search_error_message), Toast.LENGTH_SHORT).show();
+        if (TextUtils.isEmpty(latStr) || TextUtils.isEmpty(lonStr) || TextUtils.isEmpty(miles)) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle(R.string.app_name).setMessage(R.string.search_empty_error)
+                    .setPositiveButton("OK", null);
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        } else {
+            hideKeyboard(this);
+            filteredCoordinateList = DistanceCalculation.fetchCoordinatesByDistance(this, latStr, lonStr, miles);
+
+            if (filteredCoordinateList.size() < 1) {
+                SpannableString spannableString = new SpannableString(getString(R.string.search_empty, miles));
+                spannableString.setSpan(new ForegroundColorSpan(Color.RED), 0, spannableString.length(),
+                        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                searchSuccessTV.setText(spannableString);
+            } else {
+                searchSuccessTV.setText(getString(R.string.search_success, miles));
+            }
+
+            empowerAdapter.updateResults(filteredCoordinateList);
+            coordinateRV.setVisibility(View.VISIBLE);
+            coordinateRV.setAdapter(empowerAdapter);
         }
-        empowerAdapter.updateResults(filteredCoordinateList);
-        coordinateRV.setVisibility(View.VISIBLE);
-        coordinateRV.setAdapter(empowerAdapter);
     }
 
     private void hideKeyboard(Activity activity) {

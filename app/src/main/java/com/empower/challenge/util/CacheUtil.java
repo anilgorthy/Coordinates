@@ -1,7 +1,6 @@
 package com.empower.challenge.util;
 
 import android.content.Context;
-import android.os.Build;
 import android.util.Log;
 
 import com.empower.challenge.model.CoordinatesResponse;
@@ -23,12 +22,10 @@ import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
-
 public class CacheUtil {
 
     private static final String TAG = CacheUtil.class.getSimpleName();
     private static final String CACHED_FILE = "response.json";
-    Type listType = new TypeToken<List<CoordinatesResponse>>() {}.getType();
 
     public static void writeJson(Object object, Context context) {
         Type listType = new TypeToken<List<CoordinatesResponse>>() {}.getType();
@@ -38,12 +35,7 @@ public class CacheUtil {
         try {
             outputStream = new FileOutputStream(file);
             BufferedWriter bufferedWriter;
-            if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream,
-                        StandardCharsets.UTF_8));
-            } else {
-                bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-            }
+            bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, StandardCharsets.UTF_8));
 
             Log.i(TAG, "JSON is: " + gson.toJson(object, listType));
             gson.toJson(object, bufferedWriter);
@@ -73,12 +65,7 @@ public class CacheUtil {
         try {
             inputStream = new FileInputStream(file);
             InputStreamReader streamReader;
-            if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                streamReader = new InputStreamReader(inputStream,
-                        StandardCharsets.UTF_8);
-            } else {
-                streamReader = new InputStreamReader(inputStream, "UTF-8");
-            }
+            streamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
 
             jsonData = gson.fromJson(streamReader, listType);
             streamReader.close();

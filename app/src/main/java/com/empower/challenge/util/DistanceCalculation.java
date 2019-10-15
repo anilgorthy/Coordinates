@@ -16,8 +16,7 @@ public class DistanceCalculation {
 
     private static final String TAG = DistanceCalculation.class.getSimpleName();
 
-    public static double getDistance(double lat1, double lon1,
-                              double lat2, double lon2) {
+    private static double getDistance(double lat1, double lon1, double lat2, double lon2) {
 
         // distance between latitudes and longitudes
         double dLat = Math.toRadians(lat2 - lat1);
@@ -42,14 +41,12 @@ public class DistanceCalculation {
         List<CoordinatesResponse> coordinateList = CacheUtil.readJson(context);
         List<CoordinatesResponse> newCoordinateList = new ArrayList<>();
         Log.i(TAG, "List size is: " + coordinateList.size()
-                +  "Lat is: " +  Double.valueOf(lat)
+                + "Lat is: " + Double.valueOf(lat)
                 + " and lon is: " + Double.valueOf(lon));
         for (CoordinatesResponse response : coordinateList) {
-            Log.i(TAG, "Lat is: " + response.getLatitude()
-                    + " and lon is: " + response.getLongitude());
             double distanceInMiles = getDistance(Double.valueOf(lat), Double.valueOf(lon),
-                                                    Double.valueOf(response.getLatitude()),
-                                                    Double.valueOf(response.getLongitude()));
+                    Double.valueOf(response.getLatitude()),
+                    Double.valueOf(response.getLongitude()));
             Log.i(TAG, "distanceInMiles is: " + distanceInMiles);
 
             if (distanceInMiles <= Double.valueOf(miles)) {
