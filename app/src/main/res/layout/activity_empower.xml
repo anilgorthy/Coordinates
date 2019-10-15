@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:textColor="@color/colorPrimaryDark"
-        android:text="Enter coordinates below"
+        android:text="Enter coordinates and miles below"
         android:textSize="18sp" />
 
     <EditText
@@ -24,8 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="enter latitude"
-        android:imeOptions="actionSearch"
-        android:inputType="text"
+        android:inputType="numberDecimal|numberSigned"
         android:maxLines="1"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
@@ -37,7 +36,7 @@
         android:layout_height="wrap_content"
         android:hint="enter longitude"
         android:imeOptions="actionSearch"
-        android:inputType="text"
+        android:inputType="numberDecimal|numberSigned"
         android:maxLines="1"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
@@ -48,8 +47,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="distance in miles"
-        android:imeOptions="actionSearch"
-        android:inputType="text"
+        android:inputType="numberDecimal"
         android:maxLines="1"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
@@ -57,9 +55,10 @@
     
     <Button
         android:id="@+id/search"
-        android:layout_width="match_parent"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:text="@string/search"/>
+        android:text="@string/search"
+        android:layout_gravity="center_vertical|center_horizontal"/>
 
     <ProgressBar
         android:id="@+id/progressBar"

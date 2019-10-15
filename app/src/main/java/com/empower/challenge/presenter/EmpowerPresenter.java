@@ -35,7 +35,7 @@ public class EmpowerPresenter implements EmpowerPresenterContract, EmpowerReposi
             List<CoordinatesResponse> coordinatesResponseList = response.body();
             if (coordinatesResponseList != null) {
                 Log.i(TAG, "Results count is: " + coordinatesResponseList.size());
-                empowerViewContract.displayFilteredCoordinates(coordinatesResponseList);
+                empowerViewContract.fetchCoordinates(coordinatesResponseList);
             } else {
                 empowerViewContract.displayError();
             }

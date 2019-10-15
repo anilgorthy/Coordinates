@@ -23,11 +23,11 @@ public class EmpowerRepository {
      * Constructor that also initializes the networking library
      */
     public EmpowerRepository() {
-        Retrofit omdbRetrofit = new Retrofit.Builder()
+        Retrofit empowerRetrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        empowerEndpoint = omdbRetrofit.create(EmpowerEndpoint.class);
+        empowerEndpoint = empowerRetrofit.create(EmpowerEndpoint.class);
     }
 
     /**

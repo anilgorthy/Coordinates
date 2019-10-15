@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface EmpowerViewContract {
 
-    void displayFilteredCoordinates(@NonNull List<CoordinatesResponse> coordinatesResponseList);
+    void fetchCoordinates(@NonNull List<CoordinatesResponse> coordinatesResponseList);
 
     void displayError();
 }
